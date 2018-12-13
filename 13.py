@@ -21,10 +21,37 @@ cars = [] # list of tuples (car, intersection-move)
 # moves: left, straight, up = 0,1,2
 moves = ['^','>','V','<']
 
+# car tuple = (i, j, move_index, cover)
+
+def get(i,j):
+    if i >= len(board):
+        return ' '
+    if j >= len(board[i]):
+        return ' '
+    return board[i,j]
+
+def isSpace(i,j)
+    return get(i,j) == ' '
+
 for i, row in enumerate(board):
     for j, c in enumerate(row):
         if c == '>' or c == '<' or c == '^' or c == 'v':
-            cars.append((i,j,-1)) # start off left
+            cover = None
+            if isSpace(i-1,j):
+                if isSpace(i,j+1):
+                    cover = '\\'
+                elif isSpace(i,j-1):
+                    cover = '/'
+                # if isSpace(i+1,j):
+                #     cover = '-'
+            elif get(i-1,j) == '|':
+                if isSpace(i,j+1):
+                    cover = '\\'
+                elif isSpace(i,j-1):
+                    cover = '/'
+                # if isSpace(i+1,j):
+                #     cover = '-'
+            cars.append((i,j,-1, cover)) # start off left
 
 print cars
 
@@ -58,7 +85,7 @@ while True:
                 sym = '<'
         else:
             i,j = newi, newj
-        c = (newi, newj, newmove)
+        c = (newi, newj, newmove, nxt)
     print cars
     break
         
